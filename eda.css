@@ -1,0 +1,13 @@
+body {
+  padding-top: 60px; }
+
+.issue.list .issue {
+  margin-bottom: 10px;
+  border-bottom: solid 1px #aaa; }
+  .issue.list .issue ul {
+    list-style: none;
+    margin-left: 0; }
+  .issue.list .issue:last-child {
+    border: none; }
+  .issue.list .issue.selected {
+    background-color: #eee; }

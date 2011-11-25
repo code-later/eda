@@ -1,0 +1,19 @@
+body {
+  padding-top: 60px;
+}
+
+.issue.list {
+
+  .issue {
+    ul {
+      list-style: none;
+      margin-left: 0;
+    }
+    margin-bottom: 10px;
+    border-bottom: solid 1px #aaa;
+    &:last-child { border: none }
+
+    &.selected { background-color: #eee }
+  }
+
+}
