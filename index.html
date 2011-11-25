@@ -20,6 +20,11 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+    <script type="text/template" id="issue-template">
+      <h2><%= subject %></h2>
+      <p><%= description %></p>
+    </script>
   </head>
 
   <body>
@@ -67,10 +72,7 @@
             </ul>
           </div>
         </div>
-        <div class="span11">
-          <h2>Server Down?</h2>
-          <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-          <p><a class="btn" href="#">Comment &raquo;</a></p>
+        <div class="span11 issue">
         </div>
       </div>
 
@@ -80,5 +82,9 @@
 
     </div> <!-- /container -->
 
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="js/underscore.min.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/app/eda.js"></script>
   </body>
 </html>
