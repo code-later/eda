@@ -25,6 +25,19 @@
       <h2><%= subject %></h2>
       <p><%= description %></p>
     </script>
+
+    <script type="text/template" id="issue-list-entry-template">
+      <ul>
+        <li><span class="subject"><strong><a href="/issues/<%= id %>"><%= subject %></a></strong></span></li>
+        <li><span class="abstract"><%= description %></span></li>
+        <li><span class="reporter"><%= reporter %></span></li>
+        <li><span class="received date"><%= created_at %></span></li>
+      </ul>
+    </script>
+
+    <script type="text/template" id="issue-list-template">
+      <h2>New Issues</h2>
+    </script>
   </head>
 
   <body>
@@ -53,26 +66,9 @@
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span5 issue list">
-          <h2>New Issues</h2>
-          <div class="issue selected">
-            <ul>
-              <li><span class="subject"><strong><a href="/issues/21413551">Server Down?</a></strong></span></li>
-              <li><span class="abstract">Well, the way they make shows is, they make one show. That show's called a pilot.</span></li>
-              <li><span class="author">Sebastian Cohnen</span></li>
-              <li><span class="received date">23.11.2011 12:34</span></li>
-            </ul>
-          </div>
-          <div class="issue">
-            <ul>
-              <li><span class="subject"><strong><a href="/issues/12432541">Login geht nicht für Backend!!</a></strong></span></li>
-              <li><span class="abstract">Well, the way they make shows is, they make one show. That show's called a pilot.</span></li>
-              <li><span class="author">Sebastian Cohnen</span></li>
-              <li><span class="received date">23.11.2011 12:34</span></li>
-            </ul>
-          </div>
+        <div class="span5">
         </div>
-        <div class="span11 issue">
+        <div class="span11">
         </div>
       </div>
 
