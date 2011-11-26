@@ -23,6 +23,14 @@ $(function() {
       };
 
       return $.datepicker.formatDate($.datepicker.RSS, date);
+    },
+
+    excerpt: function(text) {
+      if (text.length > 255) { 
+        return text.substring(1, 255) + " ...";
+      } else {
+        return text;
+      };
     }
   });
 
