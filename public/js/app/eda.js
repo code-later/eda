@@ -46,7 +46,9 @@
 
       initialize: function() {
         _.bindAll(this, 'render',
-                  'renderIssue');
+                        'renderIssue');
+
+        this.collection.bind("reset", this.render);
       },
 
       render: function() {
@@ -56,8 +58,6 @@
       },
 
       renderIssue: function(issue) {
-        console.log("render an issue in the list", issue);
-        console.log(this);
         var view = new IssueListEntryView({
           model: issue
         });
@@ -73,28 +73,16 @@
       },
 
       initialize: function() {
-        var issue1 = new Issue({
-          id: 1,
-          subject: "Server Down??",
-          description: "they make one show. That show's called a pilot.",
-          reporter: "Sebastian Cohnen",
-          created_at: "21.11.2011 12:26"
-        });
+        var self = this;
+        self.issues = new Issues();
+        self.issueListView = new IssueListView({collection: self.issues});
 
-        var issue2 = new Issue({
-          id: 2,
-          subject: "Geht nicht",
-          description: "they make one show. That show's called a pilot.",
-          reporter: "Sebastian Cohnen",
-          created_at: "21.11.2011 23:12"
-        });
-
-        this.issues = new Issues();
-        this.issues.reset([issue2, issue1]);
-        
-        this.issueListView = new IssueListView({
-          collection: this.issues
-        });
+        (new Issues()).fetch({success: function(data) {
+          self.issues.reset(data.models);
+          self.issueListView = new IssueListView({
+            collection: self.issues
+          });
+        }});
       },
 
       home: function() {
