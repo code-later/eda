@@ -12,6 +12,9 @@ $(function() {
     }
   });
 
+  socket.on("new", function(data) {
+  });
+
   window.helper = new Object({
     displayDate: function(date) {
       if (date !== Date) { 

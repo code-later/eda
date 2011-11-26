@@ -14,12 +14,50 @@
 
     selectIssue: function(issue_id) {
       App.navigate("issues/" + issue_id, true);
-      
       this.trigger('selectCurrentIssue', issue_id);
     }
   });
 
+  window.IssueTypes = Backbone.Model.extend({
+    defaults: {
+      "new_count": 0,
+      "in_progress_count": 0,
+      "waiting_count": 0,
+      "done_count": 0
+    },
+
+    initialize: function() {
+      _.bindAll(this, "updateCounts");
+
+      newIssues.bind("add", this.updateCounts);
+      newIssues.bind("remove", this.updateCounts);
+      newIssues.bind("reset", this.updateCounts);
+    },
+
+    updateCounts: function() {
+      this.set({"new_count": newIssues.size()});
+    }
+  });
+
   $(function() {
+
+    window.IssueTypesView = Backbone.View.extend({
+      template: _.template($("#issue-types-template").html()),
+      tag: "ul",
+      className: "pills",
+
+      initialize: function() {
+        _.bindAll(this, "render");
+
+        this.model.bind("change", this.render);
+      },
+
+      render: function() {
+        $("#issues_type_navigation").html(this.el);
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+      }
+    });
 
     window.IssueView = Backbone.View.extend({
       template: _.template($("#issue-template").html()),
@@ -97,6 +135,9 @@
       }
     });
 
+    window.newIssues = new Issues();
+    window.issueTypes = new IssueTypes();
+
     window.Eda = Backbone.Router.extend({
 
       routes: {
@@ -106,13 +147,13 @@
 
       initialize: function() {
         var self = this;
-        self.issues = new Issues();
-        self.issueListView = new IssueListView({collection: self.issues});
+        self.issueListView = new IssueListView({collection: newIssues});
+        self.issueTypesView = new IssueTypesView({model: issueTypes});
 
         (new Issues()).fetch({success: function(data) {
-          self.issues.reset(data.models);
+          newIssues.reset(data.models);
           self.issueListView = new IssueListView({
-            collection: self.issues
+            collection: newIssues
           });
         }});
       },
