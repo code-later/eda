@@ -65,5 +65,58 @@
       },
     });
 
+    window.Eda = Backbone.Router.extend({
+
+      routes: {
+        '': 'home',
+        'issues/:id' : 'issues'
+      },
+
+      initialize: function() {
+        var issue1 = new Issue({
+          id: 1,
+          subject: "Server Down??",
+          description: "they make one show. That show's called a pilot.",
+          reporter: "Sebastian Cohnen",
+          created_at: "21.11.2011 12:26"
+        });
+
+        var issue2 = new Issue({
+          id: 2,
+          subject: "Geht nicht",
+          description: "they make one show. That show's called a pilot.",
+          reporter: "Sebastian Cohnen",
+          created_at: "21.11.2011 23:12"
+        });
+
+        this.issues = new Issues();
+        this.issues.reset([issue2, issue1]);
+        
+        this.issueListView = new IssueListView({
+          collection: this.issues
+        });
+      },
+
+      home: function() {
+        $(".span5").empty();
+        $(".span5").html(this.issueListView.render().el);
+      },
+
+      issues: function(issue_id) {
+        var issue = this.issues.find(function(issue) {
+          if(issue.id == issue_id) { return issue }
+        });
+
+        this.issueView = new IssueView({
+          model: issue
+        });
+
+        $(".span11").html(this.issueView.render().el);
+      }
+    });
+
+    window.App = new Eda();
+    Backbone.history.start({pushState: true});
+
   });
 })(jQuery);

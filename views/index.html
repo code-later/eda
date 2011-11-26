@@ -12,8 +12,8 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="bootstrap.css" rel="stylesheet">
-    <link href="eda.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/eda.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -28,7 +28,7 @@
 
     <script type="text/template" id="issue-list-entry-template">
       <ul>
-        <li><span class="subject"><strong><a href="/issues/<%= id %>"><%= subject %></a></strong></span></li>
+        <li><span class="subject"><strong><a href="issues/<%= id %>" data-backbone_link="true"><%= subject %></a></strong></span></li>
         <li><span class="abstract"><%= description %></span></li>
         <li><span class="reporter"><%= reporter %></span></li>
         <li><span class="received date"><%= created_at %></span></li>
@@ -82,5 +82,6 @@
     <script src="js/underscore.min.js"></script>
     <script src="js/backbone.js"></script>
     <script src="js/app/eda.js"></script>
+    <script src="js/app/application.js"></script>
   </body>
 </html>
