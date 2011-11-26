@@ -12,6 +12,16 @@ $(function() {
     }
   });
 
+  window.helper = new Object({
+    displayDate: function(date) {
+      if (date !== Date) { 
+        date = new Date(date);
+      };
+
+      return $.datepicker.formatDate($.datepicker.RSS, date);
+    }
+  });
+
   $('a[data-backbone_link="true"]').live('click', function (e) {
     App.navigate($(this).attr('href'), true);
     return false;

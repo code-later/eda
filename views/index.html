@@ -32,7 +32,7 @@
         <li><span class="abstract"><%= description %></span></li>
         <li class="metadata">
           <span class="reporter">by <strong><%= reporter %></strong></span>
-          <span class="received date"><%= created_at %></span>
+          <span class="received date"><%= helper.displayDate(created_at) %></span>
         </li>
       </ul>
     </script>
@@ -81,6 +81,7 @@
     </div> <!-- /container -->
 
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="/js/underscore.min.js"></script>
     <script src="/js/backbone.js"></script>
