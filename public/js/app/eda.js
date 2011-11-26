@@ -1,5 +1,11 @@
 (function($) {
 
+  Backbone.sync = function(method, model, options) {
+    var response_id = method + "-" + window.socket.socket.sessionid + "-" + Math.random().toString();
+    window.response_callbacks[response_id] = options.success;
+    window.socket.emit(method, {header: {response_id: response_id}, payload: {url: model.url}});
+  }
+
   window.Issue = Backbone.Model.extend({});
 
   window.Issues = Backbone.Collection.extend({
