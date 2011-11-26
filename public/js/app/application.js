@@ -13,6 +13,7 @@ $(function() {
   });
 
   socket.on("new", function(data) {
+    newIssues.add(data.payload);
   });
 
   window.helper = new Object({

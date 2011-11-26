@@ -107,9 +107,11 @@
       initialize: function() {
         _.bindAll(this, 'render',
                         'renderIssue',
+                        'prependIssue',
                         'selectCurrentIssue');
 
         this.collection.bind("reset", this.render);
+        this.collection.bind("add", this.prependIssue);
         this.collection.bind("selectCurrentIssue", this.selectCurrentIssue);
       },
 
@@ -120,12 +122,23 @@
         return this;
       },
 
-      renderIssue: function(issue) {
+      prependIssue: function(issue) {
+        this.renderIssue(issue, {prepend: true});
+      },
+
+      renderIssue: function(issue, options) {
         var view = new IssueListEntryView({
           model: issue,
           collection: this.collection
         });
-        $(this.el).append(view.render().el);
+        if (options.prepend) {
+          var newIssue = view.render().el;
+          $(newIssue).hide();
+          $(this.el).prepend(newIssue);
+          $(newIssue).slideDown();
+        } else {
+          $(this.el).append(view.render().el);
+        };
       },
 
       selectCurrentIssue: function(issue_id) {
