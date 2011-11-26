@@ -10,7 +10,13 @@
 
   window.Issues = Backbone.Collection.extend({
     model: Issue,
-    url: "/issues"
+    url: "/issues",
+
+    selectIssue: function(issue_id) {
+      App.navigate("issues/" + issue_id, true);
+      
+      this.trigger('selectCurrentIssue', issue_id);
+    }
   });
 
   $(function() {
@@ -18,7 +24,7 @@
     window.IssueView = Backbone.View.extend({
       template: _.template($("#issue-template").html()),
       tag: "div",
-      className: "",
+      className: "conversation",
 
       initialize: function() {
         _.bindAll(this, 'render');
@@ -33,15 +39,25 @@
     window.IssueListEntryView = Backbone.View.extend({
       template: _.template($("#issue-list-entry-template").html()),
       tag: "div",
-      className: "",
+      className: "entry",
+
+      events: {
+        'click': "selectIssue"
+      },
 
       initialize: function() {
-        _.bindAll(this, 'render');
+        _.bindAll(this, 'render',
+                        'selectIssue');
       },
 
       render: function() {
         $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).data("id", this.model.id);
         return this;
+      },
+
+      selectIssue: function() {
+        this.collection.selectIssue($(this.el).data("id"));
       }
     });
 
@@ -52,9 +68,11 @@
 
       initialize: function() {
         _.bindAll(this, 'render',
-                        'renderIssue');
+                        'renderIssue',
+                        'selectCurrentIssue');
 
         this.collection.bind("reset", this.render);
+        this.collection.bind("selectCurrentIssue", this.selectCurrentIssue);
       },
 
       render: function() {
@@ -66,10 +84,17 @@
 
       renderIssue: function(issue) {
         var view = new IssueListEntryView({
-          model: issue
+          model: issue,
+          collection: this.collection
         });
         $(this.el).append(view.render().el);
       },
+
+      selectCurrentIssue: function(issue_id) {
+        this.$(".entry").each(function(index, el) {
+          $(el).toggleClass("selected", $(el).data("id") == issue_id);
+        });
+      }
     });
 
     window.Eda = Backbone.Router.extend({

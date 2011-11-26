@@ -2,18 +2,35 @@ body {
   padding-top: 60px;
 }
 
-.issue.list {
+.issue {
+  .conversation {
+    background-color: #eee;
+    padding: 10px 20px;
+  }
 
-  .issue {
-    ul {
-      list-style: none;
-      margin-left: 0;
+  &.list {
+    .entry {
+      padding: 5px 10px;
+      ul {
+        list-style: none;
+        cursor: pointer;
+        margin-left: 0;
+        li.metadata {
+          font-size: 87%;
+          span {
+            display: inline-block;
+            &.reporter { float: right }
+            &.date.received { font-style: italic }
+          }
+        }
+      }
+
+      margin-bottom: 10px;
+      border-bottom: solid 1px #aaa;
+      &:last-child { border: none }
+
+      &.selected { background-color: #eee }
     }
-    margin-bottom: 10px;
-    border-bottom: solid 1px #aaa;
-    &:last-child { border: none }
-
-    &.selected { background-color: #eee }
   }
 
 }

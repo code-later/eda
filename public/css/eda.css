@@ -1,13 +1,26 @@
 body {
   padding-top: 60px; }
 
-.issue.list .issue {
+.issue .conversation {
+  background-color: #eee;
+  padding: 10px 20px; }
+.issue.list .entry {
+  padding: 5px 10px;
   margin-bottom: 10px;
   border-bottom: solid 1px #aaa; }
-  .issue.list .issue ul {
+  .issue.list .entry ul {
     list-style: none;
+    cursor: pointer;
     margin-left: 0; }
-  .issue.list .issue:last-child {
+    .issue.list .entry ul li.metadata {
+      font-size: 87%; }
+      .issue.list .entry ul li.metadata span {
+        display: inline-block; }
+        .issue.list .entry ul li.metadata span.reporter {
+          float: right; }
+        .issue.list .entry ul li.metadata span.date.received {
+          font-style: italic; }
+  .issue.list .entry:last-child {
     border: none; }
-  .issue.list .issue.selected {
+  .issue.list .entry.selected {
     background-color: #eee; }

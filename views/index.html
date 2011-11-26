@@ -30,8 +30,10 @@
       <ul>
         <li><span class="subject"><strong><a href="issues/<%= id %>" data-backbone_link="true"><%= subject %></a></strong></span></li>
         <li><span class="abstract"><%= description %></span></li>
-        <li><span class="reporter"><%= reporter %></span></li>
-        <li><span class="received date"><%= created_at %></span></li>
+        <li class="metadata">
+          <span class="reporter">by <strong><%= reporter %></strong></span>
+          <span class="received date"><%= created_at %></span>
+        </li>
       </ul>
     </script>
 
@@ -45,11 +47,11 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <a class="brand" href="#">Hotboy Inc.</a>
+          <a class="brand" href="/">Hotboy Inc.</a>
           <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
       </div>
